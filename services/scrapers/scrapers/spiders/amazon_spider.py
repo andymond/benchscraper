@@ -40,7 +40,9 @@ class AmazonSpider(scrapy.Spider):
         with open('../../data/amazon_results.json') as file:
             data = json.load(file)
 
-        data.extend(results)
+        for item in results:
+            if item not in data:
+                data.append(item)
 
         with open('../../data/amazon_results.json', 'w') as file:
             json.dump(data, file)
