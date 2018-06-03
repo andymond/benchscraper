@@ -10,7 +10,27 @@
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'costco_scraper'
-USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0 Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0.'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'
+
+ROTATING_PROXY_LIST = [
+    '133.130.101.62:8181',
+    '71.13.112.152:3128',
+    '103.105.50.178:81',
+    '149.28.118.195:8080',
+    '45.76.18.109:8080',
+    '34.213.199.191:80',
+    '167.99.5.127:8080',
+    '47.206.51.67:8080',
+    '18.188.165.157:80',
+    '34.213.199.191:80',
+    '152.157.119.253:3128',
+    '206.189.181.249:3128',
+    '159.89.184.107:80',
+    '45.76.18.109:8080',
+    '54.209.135.103:3128',
+    '103.102.161.104:80',
+    '71.13.112.152:3128'
+]
 
 SPIDER_MODULES = ['costco_scraper.spiders']
 NEWSPIDER_MODULE = 'costco_scraper.spiders'
@@ -56,6 +76,8 @@ COOKIES_DEBUG = True
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'costco_scraper.middlewares.CostcoScraperDownloaderMiddleware': 543,
+   'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+   'rotating_proxies.middlewares.BanDetectionMiddleware': 620
 }
 
 # Enable or disable extensions
