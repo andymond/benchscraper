@@ -19,8 +19,5 @@ for param in paramsList:
 
 print(results)
 
-with open('./data/barcode_api_results.jl', 'a') as outfile:
-    json.dump(results, outfile)
-
-with open('./data/barcode_api_results.json', 'a') as outfile:
+with open('./data/walmart_api_results.json', 'a') as outfile:
     json.dump(results, outfile)
