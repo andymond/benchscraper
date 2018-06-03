@@ -1,8 +1,16 @@
 import scrapy
+import json
 
 class FoodPricesSpider(scrapy.Spider):
     name = "food_prices"
-    urls = ['https://www.costco.com/grocery-household.html?dept=Grocery&keyword=beans']
+
+    def get_urls(self):
+        text_file = open("../../data/food_list.txt", "r")
+        params_list = text_file.read().splitlines()
+        base_url = 'https://www.costco.com/grocery-household.html?dept=Grocery&keyword='
+        urls = [base_url + param for param in params_list]
+
+        return urls
 
     def response_is_ban(self, request, response):
         return b'banned' in response.body
@@ -11,18 +19,15 @@ class FoodPricesSpider(scrapy.Spider):
         return None
 
     def start_requests(self):
-        for url in self.urls:
+        urls = self.get_urls()
+        for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         names = response.xpath('//p[@class="description"]/a/text()').extract()
         prices = response.xpath('//div[@class="price"]/text()').extract()
         associated = list(zip(names, prices))
-        data = [{'name': name, 'price': price, 'seller': 'costco'} for i, (name, price) in enumerate(associated)]
+        results = [{'name': name, 'price': price, 'seller': 'costco'} for i, (name, price) in enumerate(associated)]
 
-        # yield {
-        #     'name': response.xpath('//div[@class="price"]/text()').extract(),
-        #     'price': response.xpath('//p[@class="description"]/a/text()').extract(),
-        #     'seller': "Costco",
-        #     'url': self.start_urls[0]
-        # }
+        with open('../../data/costco_results.json', 'a') as outfile:
+            json.dump(results, outfile)
