@@ -29,5 +29,10 @@ class FoodPricesSpider(scrapy.Spider):
         associated = list(zip(names, prices))
         results = [{'name': name, 'price': price, 'seller': 'costco'} for i, (name, price) in enumerate(associated)]
 
-        with open('../../data/costco_results.json', 'a') as outfile:
-            json.dump(results, outfile)
+        with open('../../data/costco_results.json') as file:
+            data = json.load(file)
+
+        data.extend(results)
+
+        with open('../../data/costco_results.json', 'w') as file:
+            json.dump(data, file)
