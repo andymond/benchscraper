@@ -32,7 +32,7 @@ class CostcoSpider(scrapy.Spider):
         associated = list(zip(names, prices))
         results = [{'name': name, 'price': price, 'seller': 'costco'} for i, (name, price) in enumerate(associated)]
 
-        if not self.test == True:
+        if self.test == False:
             with open('../../data/costco_results.json') as file:
                 data = json.load(file)
 
