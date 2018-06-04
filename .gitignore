@@ -1,5 +1,5 @@
+*.pyc
 /product_info
 /tutorial
 /venv
 /services/settings.py
-/*/__pycache__
