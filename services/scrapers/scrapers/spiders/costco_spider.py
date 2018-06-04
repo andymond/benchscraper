@@ -4,8 +4,11 @@ import json
 class CostcoSpider(scrapy.Spider):
     name = "costco_spider"
 
-    def get_urls(self):
-        text_file = open("../../data/food_list.txt", "r")
+    def __init__(self, test=False):
+        self.test = test
+
+    def get_urls(self, file_path="../../data/food_list.txt"):
+        text_file = open(file_path, "r")
         params_list = text_file.read().splitlines()
         base_url = 'https://www.costco.com/grocery-household.html?dept=Grocery&keyword='
         urls = [base_url + param for param in params_list]
@@ -29,10 +32,13 @@ class CostcoSpider(scrapy.Spider):
         associated = list(zip(names, prices))
         results = [{'name': name, 'price': price, 'seller': 'costco'} for i, (name, price) in enumerate(associated)]
 
-        with open('../../data/costco_results.json') as file:
-            data = json.load(file)
+        if self.test == False:
+            with open('../../data/costco_results.json') as file:
+                data = json.load(file)
 
-        data.extend(results)
+            data.extend(results)
 
-        with open('../../data/costco_results.json', 'w') as file:
-            json.dump(data, file)
+            with open('../../data/costco_results.json', 'w') as file:
+                json.dump(data, file)
+
+        return results
