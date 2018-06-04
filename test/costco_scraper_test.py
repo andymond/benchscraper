@@ -5,10 +5,10 @@ import unittest
 
 class CostcoSpiderTest(unittest.TestCase):
 
-    def setup:
+    def setUp(self):
         self.spider = costco_spider.CostcoSpider()
 
-    def test_get_urls_generates_urls:
+    def test_get_urls_generates_urls(self):
         file_path = "../data/food_list.txt"
         url_list = self.spider.get_urls(file_path)
 
