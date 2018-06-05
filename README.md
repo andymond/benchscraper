@@ -16,7 +16,7 @@ Walmart API Key
 MLabs Mongodb database (for production only)  
 
 ## Setup & Use
-install python 3  
+install python 3 & pip
 get into the project:  
 ```git clone https://github.com/andymond/benchscraper.git```  
 ```cd benchscraper```  
@@ -24,6 +24,7 @@ get into the project:
 set up  
 ```python -m venv venv```  
 ```. ./venv/bin/activate```  
+```pip install -r requirements.txt```
 ```scripts/update-data``` to run api recorder, both scrapers and save to local database  
 -> to save to production database, set ```PROD=<your production mongodb uri>```  
   
