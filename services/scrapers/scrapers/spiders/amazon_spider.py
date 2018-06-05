@@ -1,4 +1,5 @@
 import scrapy
+import datetime
 import json
 
 class AmazonSpider(scrapy.Spider):
@@ -38,7 +39,8 @@ class AmazonSpider(scrapy.Spider):
             if not (name is None) or ((name, price) in names_and_prices):
                 names_and_prices.append((name, price))
 
-        results = [{'name': name, 'price': price, 'seller': 'amazon'} for i, (name, price) in enumerate(names_and_prices)]
+        date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        results = [{'name': name, 'price': price, 'seller': 'amazon', 'recorded_at': date} for i, (name, price) in enumerate(names_and_prices)]
 
         if self.test == False:
             with open('../../data/amazon_results.json') as file:
