@@ -12,3 +12,7 @@ printf 'gathering costco_data...\n'
 scrapy crawl costco_spider
 
 printf 'collected data\n'
+
+printf 'sending data to database\n'
+cd ../../
+python db/update_database.py
