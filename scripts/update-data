@@ -1,0 +1,18 @@
+#!/bin/bash
+
+printf 'gathering walmart data...\n'
+cd services/
+python walmart_api_recorder.py
+
+printf 'gathering amazon data...\n'
+cd scrapers/
+scrapy crawl amazon_spider
+
+printf 'gathering costco_data...\n'
+scrapy crawl costco_spider
+
+printf 'collected data\n'
+
+printf 'sending data to database\n'
+cd ../../
+python db/update_database.py

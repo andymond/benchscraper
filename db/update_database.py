@@ -26,5 +26,4 @@ else:
     db = client.benchscraper_dev
 
 items = db.items
-items.remove({})
 items.insert_many(data_list)

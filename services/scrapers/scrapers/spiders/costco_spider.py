@@ -1,4 +1,5 @@
 import scrapy
+import datetime
 import json
 
 class CostcoSpider(scrapy.Spider):
@@ -30,15 +31,11 @@ class CostcoSpider(scrapy.Spider):
         names = response.xpath('//p[@class="description"]/a/text()').extract()
         prices = response.xpath('//div[@class="price"]/text()').extract()
         associated = list(zip(names, prices))
-        results = [{'name': name, 'price': price, 'seller': 'costco'} for i, (name, price) in enumerate(associated)]
+        date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        results = [{'name': name, 'price': price, 'seller': 'costco', 'recorded_at': date} for i, (name, price) in enumerate(associated)]
 
         if self.test == False:
-            with open('../../data/costco_results.json') as file:
-                data = json.load(file)
-
-            data.extend(results)
-
             with open('../../data/costco_results.json', 'w') as file:
-                json.dump(data, file)
+                json.dump(results, file)
 
         return results
