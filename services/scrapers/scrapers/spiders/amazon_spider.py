@@ -43,14 +43,7 @@ class AmazonSpider(scrapy.Spider):
         results = [{'name': name, 'price': price, 'seller': 'amazon', 'recorded_at': date} for i, (name, price) in enumerate(names_and_prices)]
 
         if self.test == False:
-            with open('../../data/amazon_results.json') as file:
-                data = json.load(file)
-
-            for item in results:
-                if item not in data:
-                    data.append(item)
-
             with open('../../data/amazon_results.json', 'w') as file:
-                json.dump(data, file)
+                json.dump(results, file)
 
         return results
