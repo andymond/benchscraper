@@ -1,9 +1,9 @@
-import settings
+import os
 import requests
 import datetime
 import json
 
-base_url = "http://api.walmartlabs.com/v1/search?apiKey=" + settings.WALMART_API_KEY + "&query="
+base_url = "http://api.walmartlabs.com/v1/search?apiKey=" + os.environ["WALMART_API_KEY"] + "&query="
 text_file = open("../data/food_list.txt", "r")
 paramsList = text_file.read().splitlines()
 
