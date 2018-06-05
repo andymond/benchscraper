@@ -8,30 +8,34 @@ Tools to gather pricing data from the Internet
 * If the data looks good, a user can populate their mongodb collection with the information gathered
 
 ## Dependencies
-Python 3.6.5
-Requests
-Scrapy
-PyMongo
-Walmart API Key
-MLabs Mongodb database (for production only)
+Python 3.6.5  
+Requests  
+Scrapy  
+PyMongo  
+Walmart API Key  
+MLabs Mongodb database (for production only)  
 
 ## Setup & Use
-install python 3
-get into the project:
-```git clone https://github.com/andymond/benchscraper.git```
-```cd benchscraper```
-
-set up
-```python -m venv venv```
-```. ./venv/bin/activate```
-```scripts/update-data``` to run api recorder, both scrapers and save to local database
--> to save to production database, set ```PROD=<your production mongodb uri>```
-
-to run scrapers individually: 
+install python 3  
+get into the project:  
+```git clone https://github.com/andymond/benchscraper.git```  
+```cd benchscraper```  
+  
+set up  
+```python -m venv venv```  
+```. ./venv/bin/activate```  
+```scripts/update-data``` to run api recorder, both scrapers and save to local database  
+-> to save to production database, set ```PROD=<your production mongodb uri>```  
+  
+to run scrapers individually:  
 from within services directory:
-```scrapy crawl costco_spider```
-```scrapy crawl amazon_spider```
-```python walmart_api_recorder.py```
+```scrapy crawl costco_spider```  
+```scrapy crawl amazon_spider```  
+```python walmart_api_recorder.py``` 
+
+to populate db from json records:
+from root directory
+```python db/update_database.py```
 
 to test scrapers generate urls & parse return as expected:
 from within test directory:
