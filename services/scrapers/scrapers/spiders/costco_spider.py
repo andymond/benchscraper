@@ -8,7 +8,7 @@ class CostcoSpider(scrapy.Spider):
     def __init__(self, test=False):
         self.test = test
 
-    def get_urls(self, file_path="../../data/food_list.txt"):
+    def get_urls(self, file_path="./data/food_list.txt"):
         text_file = open(file_path, "r")
         params_list = text_file.read().splitlines()
         base_url = 'https://www.costco.com/grocery-household.html?dept=Grocery&keyword='
@@ -35,7 +35,7 @@ class CostcoSpider(scrapy.Spider):
         results = [{'name': name, 'price': price, 'seller': 'costco', 'recorded_at': date} for i, (name, price) in enumerate(associated)]
 
         if self.test == False:
-            with open('../../data/costco_results.json', 'w') as file:
+            with open('./data/costco_results.json', 'w') as file:
                 json.dump(results, file)
 
         return results

@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '../services/scrapers/scrapers/spiders')
+sys.path.insert(0, './services/scrapers/scrapers/spiders')
 import costco_spider
 import unittest
 from responses import fake_response_from_file
@@ -10,7 +10,7 @@ class CostcoSpiderTest(unittest.TestCase):
         self.spider = costco_spider.CostcoSpider(test=True)
 
     def test_get_urls_generates_urls(self):
-        file_path = "../data/food_list.txt"
+        file_path = "./data/food_list.txt"
         url_list = self.spider.get_urls(file_path)
 
         self.assertEqual(50, len(url_list))

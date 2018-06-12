@@ -3,7 +3,7 @@ import os
 
 def create_suite():
     suite = unittest.TestSuite()
-    for file in os.listdir("."):
+    for file in os.listdir("./test"):
         if file.endswith("_test.py"):
             print("running " + file)
             name = file[0:-3]

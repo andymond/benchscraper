@@ -12,7 +12,7 @@ def fake_response_from_file(file_name, url=None):
         responses_dir = os.path.dirname((os.path.realpath(__file__)))
         file_path = os.path.join(responses_dir + file_name)
     else:
-        file_path = 'responses' + file_name
+        file_path = 'test/responses' + file_name
 
     file_content = open(file_path, 'r', encoding='utf-8').read()
     response = HtmlResponse(url=url, request=request, body=file_content, encoding='utf-8')

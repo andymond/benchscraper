@@ -8,7 +8,7 @@ class AmazonSpider(scrapy.Spider):
     def __init__(self, test=False):
         self.test = test
 
-    def get_urls(self, file_path="../../data/food_list.txt"):
+    def get_urls(self, file_path="./data/food_list.txt"):
         text_file = open(file_path)
         params_list = text_file.read().splitlines()
         base_url = "https://www.amazon.com/s/ref=sr_nr_n_0?fst=as%3Aoff&rh=n%3A16310101%2Ck%3A&keywords="
@@ -43,7 +43,7 @@ class AmazonSpider(scrapy.Spider):
         results = [{'name': name, 'price': price, 'seller': 'amazon', 'recorded_at': date} for i, (name, price) in enumerate(names_and_prices)]
 
         if self.test == False:
-            with open('../../data/amazon_results.json', 'w') as file:
+            with open('./data/amazon_results.json', 'w') as file:
                 json.dump(results, file)
 
         return results
