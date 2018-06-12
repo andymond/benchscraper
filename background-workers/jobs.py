@@ -22,4 +22,4 @@ def get_costco():
 
 def send_to_database():
     os.system('printf "sending data to db...\n"')
-    db_manager.send()
+    update_database.send()
