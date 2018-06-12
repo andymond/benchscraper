@@ -10,35 +10,16 @@ import update_database
 
 def get_walmart():
     os.system('printf "gathering walmart data...\n"')
+    walmart_api_recorder.record()
 
 def get_amazon():
     os.system('printf "gathering amazon data...\n"')
+    amazon_spider.start_requests()
 
 def get_costco():
     os.system('printf "gathering costco data...\n"')
+    costco_spider.start_requests()
 
 def send_to_database():
     os.system('printf "sending data to db...\n"')
-
-get_walmart()
-get_amazon()
-get_costco()
-send_to_database()
-
-#
-# printf 'gathering walmart data...\n'
-# cd services/
-# python walmart_api_recorder.py
-#
-# printf 'gathering amazon data...\n'
-# cd scrapers/
-# scrapy crawl amazon_spider
-#
-# printf 'gathering costco_data...\n'
-# scrapy crawl costco_spider
-#
-# printf 'collected data\n'
-#
-# printf 'sending data to database\n'
-# cd ../../
-# python db/update_database.py
+    db_manager.send()
