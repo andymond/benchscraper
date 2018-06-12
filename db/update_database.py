@@ -25,5 +25,6 @@ else:
     client = MongoClient()
     db = client.benchscraper_dev
 
-items = db.items
-items.insert_many(data_list)
+def send():
+    items = db.items
+    items.insert_many(data_list)
